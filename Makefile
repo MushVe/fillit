@@ -6,15 +6,15 @@
 #    By: czhang <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 19:51:13 by czhang            #+#    #+#              #
-#    Updated: 2019/02/07 13:51:44 by czhang           ###   ########.fr        #
+#    Updated: 2019/02/11 19:59:21 by czhang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = test_gnl
+NAME = fillit
 
 LIB = libft/libft.a
 
-FILE = get_next_line.c\
+FILE = check.c\
 	   main.c\
 
 INC = -I libft/includes
