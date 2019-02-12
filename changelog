@@ -3,3 +3,6 @@ ALL), check.c pas sur a 100% pour la fonction neighbors, tu peux check stp ?
 
 12/02, Camille : rajout de tests dans le main.c, modification de la fonction 
 neighbors, ajout du fichier auteur
+
+12/02, Clement : j'ai vmt la flemme de faire le liant entre la liste chainee
+et les char*, le fichier coord.c m'a pompe toute mon energie !
