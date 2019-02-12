@@ -6,7 +6,7 @@
 /*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 15:02:42 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/11 20:37:42 by czhang           ###   ########.fr       */
+/*   Updated: 2019/02/12 14:00:12 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,26 +36,18 @@ int		neighbors(char *str)
 	int	count;
 
 	i = -1;
-	count = 1;
+	count = 0;
 	while (++i < 20 && count != 4)
-		while (str[i] == '#' && count != 4)
+		if (str[i] == '#')
 		{
-			if (i + 1 <= 19 && str[i + 1] == '#')
-			{
+			if ((i + 1 < 20 || i + 5 < 20) \
+				&& (str[i + 1] == '#' || str[i - 1] == '#' \
+				|| str[i - 5] == '#' || str[i + 5] == '#'))
 				count++;
-				i = i + 1;
-				break ;
-			}
-			else if (i + 5 <= 19 && str[i + 5] == '#')
-			{
-				count++;
-				i = i + 5;
-				break ;
-			}
-			else if (count != 4)
-				return (0);
 		}
-	return (1);
+	if (count == 4)
+		return (1);
+	return (0);
 }
 
 int		is_tetrimino(char *str)
@@ -71,7 +63,9 @@ int		is_tetrimino(char *str)
 	while (++i < 20)
 		if (!is_valid_char(str[i], i))
 			return (0);
-	if (count_sharp(str) != 4 || neighbors(str) == 0)
+	if (count_sharp(str) != 4)
+		return (0);
+	if (!neighbors(str))
 		return (0);
 	return (1);
 }
