@@ -6,13 +6,13 @@
 /*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 15:02:42 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/12 14:00:12 by cseguier         ###   ########.fr       */
+/*   Updated: 2019/02/12 17:56:25 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		is_valid_char(char c, int i)
+int	is_valid_char(char c, int i)
 {
 	if ((i % 5) == 4)
 		return (c == '\n');
@@ -20,7 +20,7 @@ int		is_valid_char(char c, int i)
 		return ((c == '.') || (c == '#'));
 }
 
-int		count_sharp(char *str)
+int	count_sharp(char *str)
 {
 	if (*str == '\0')
 		return (0);
@@ -30,7 +30,7 @@ int		count_sharp(char *str)
 		return (count_sharp(str + 1));
 }
 
-int		neighbors(char *str)
+int	neighbors(char *str)
 {
 	int i;
 	int	count;
@@ -50,15 +50,12 @@ int		neighbors(char *str)
 	return (0);
 }
 
-int		is_tetrimino(char *str)
+int			is_tetrimino(char *str)
 {
 	int	i;
 
 	if (ft_strlen(str) != 20)
-	{
-		ft_putstr("lol");
 		return (0);
-	}
 	i = -1;
 	while (++i < 20)
 		if (!is_valid_char(str[i], i))
