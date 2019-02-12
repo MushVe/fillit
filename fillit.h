@@ -6,7 +6,7 @@
 /*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 15:11:39 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/12 17:41:24 by czhang           ###   ########.fr       */
+/*   Updated: 2019/02/12 21:39:16 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 # include "libft/libft.h"
 
-typedef struct	tetrimino
+typedef struct	s_tetrimino
 {
-	int[4][2]			coord;
-	struct tetrimino	*next;
-	struct tetrimino	*previous;
-}				tetrimino_list;
+	int					coord[4][2];
+	struct s_tetrimino	*next;
+	struct s_tetrimino	*previous;
+}				tetrimino;
 
 int			is_valid_char(char c, int i);
 
@@ -38,6 +38,10 @@ void		del_tetrimino(tetrimino **alst);
 
 void		iter_tetrimino(tetrimino *lst, void (*f)(tetrimino *tetri));
 
-tetrimino	map_tetrimino(tetrimino *lst, tetrimino *(*f)(tetrimino *tetri));
+tetrimino	*map_tetrimino(tetrimino *lst, tetrimino *(*f)(tetrimino *tetri));
+
+void		move_coord(char *str);
+
+int			read_file(char *file_name);
 
 #endif

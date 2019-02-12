@@ -6,11 +6,11 @@
 /*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 16:26:50 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/12 17:39:14 by czhang           ###   ########.fr       */
+/*   Updated: 2019/02/12 20:39:56 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit"
+#include "fillit.h"
 
 tetrimino	*new_tetrimino(int **coord)
 {
@@ -19,15 +19,8 @@ tetrimino	*new_tetrimino(int **coord)
 
 	if (!(tetri = (tetrimino*)malloc(sizeof(tetrimino))))
 		return (NULL);
-	if (!coord)
-		(tetri->coord) = NULL;
-	else
+	if (coord)
 	{
-		if (!(tetri->coord = (void*)malloc(sizeof(void) * content_size)))
-		{
-			free(tetri);
-			return (NULL);
-		}
 		i = -1;
 		while (++i < 4)
 		{
@@ -38,6 +31,7 @@ tetrimino	*new_tetrimino(int **coord)
 	tetri->next = NULL;
 	tetri->previous = NULL;
 	return (tetri);
+}
 
 void		add_tetrimino(tetrimino **alst, tetrimino *new)
 {
@@ -50,7 +44,7 @@ void		del_tetrimino(tetrimino **alst)
 	if ((*alst)->next)
 		del_tetrimino(&(*alst)->next);
 	if (alst && *alst)
-		ft_memdel((void**)coord);
+		ft_memdel((void**)(*alst)->coord);
 	ft_memdel((void**)alst);
 }
 
@@ -66,13 +60,13 @@ void		iter_tetrimino(tetrimino *lst, void (*f)(tetrimino *tetri))
 	}
 }
 
-tetrimino	map_tetrimino(tetrimino *lst, tetrimino *(*f)(tetrimino *tetri))
+tetrimino	*map_tetrimino(tetrimino *lst, tetrimino *(*f)(tetrimino *tetri))
 {
 	tetrimino *newelem;
 
-	if (!(newelem = new_tetrimino(f(lst)->coord)))
+	if (!(newelem = new_tetrimino((int**)f(lst)->coord)))
 		return (NULL);
 	if (lst->next)
-		newelem->next = ft_lstmap(lst->next, f);
+		newelem->next = map_tetrimino(lst->next, f);
 	return (newelem);
 }
