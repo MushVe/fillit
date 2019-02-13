@@ -6,7 +6,7 @@
 /*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 15:11:39 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/12 21:39:16 by czhang           ###   ########.fr       */
+/*   Updated: 2019/02/13 13:45:44 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define FILLIT_H
 
 # include "libft/libft.h"
+
+# define BUFF_SIZE 21
 
 typedef struct	s_tetrimino
 {
