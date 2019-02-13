@@ -6,7 +6,7 @@
 #    By: czhang <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 19:51:13 by czhang            #+#    #+#              #
-#    Updated: 2019/02/12 21:38:49 by czhang           ###   ########.fr        #
+#    Updated: 2019/02/13 13:51:05 by czhang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,9 @@ $(LIB) :
 objs/%.o: %.c
 	@mkdir -p objs
 	$(CC) $(INC) -o $@ -c $<
+
+test:
+	gcc check.c coord.c tetrimino.c read_file.c ../main.c $(LIB)
 
 clean:
 	$(RM) $(OBJ)
