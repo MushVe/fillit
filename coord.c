@@ -6,7 +6,7 @@
 /*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 17:41:40 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/13 13:57:12 by czhang           ###   ########.fr       */
+/*   Updated: 2019/02/13 14:27:04 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void			move_up(char *str)
 {
 	int		i;
 	int		n_lines;
+	int		j;
 
 	i = 0;
 	n_lines = 0;
@@ -56,11 +57,12 @@ static void			move_up(char *str)
 		return ;
 	i = n_lines * 5;
 	ft_memmove((void*)str, (const void*)str + i, 20 - i);
-	while (i > 20 - n_lines * 5)
-		if ((20 - i) % 5 == 4)
-			str[20 - i--] = '\n';
+	j = 20 - i;
+	while (++j < 20)
+		if (j % 5 == 4)
+			str[j] = '\n';
 		else
-			str[20 - i--] = '.';
+			str[j] = '.';
 }
 
 static void			move_left(char *str)
