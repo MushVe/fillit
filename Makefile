@@ -6,7 +6,7 @@
 #    By: czhang <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 19:51:13 by czhang            #+#    #+#              #
-#    Updated: 2019/02/13 13:51:05 by czhang           ###   ########.fr        #
+#    Updated: 2019/02/15 10:53:40 by czhang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ LIB = libft/libft.a
 
 FILE = check.c\
 	   main.c\
+	   move_coord.c\
 	   coord.c\
 	   tetrimino.c\
 	   read_file.c
