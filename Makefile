@@ -6,7 +6,7 @@
 #    By: czhang <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 19:51:13 by czhang            #+#    #+#              #
-#    Updated: 2019/02/15 18:38:52 by czhang           ###   ########.fr        #
+#    Updated: 2019/02/15 21:01:11 by czhang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ FILE = check.c\
 	   coord.c\
 	   tetrimino.c\
 	   resolve.c\
+	   grid.c\
 	   read_file.c\
 	   print.c
 
