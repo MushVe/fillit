@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 16:40:33 by cseguier          #+#    #+#             */
-/*   Updated: 2019/02/15 11:36:40 by czhang           ###   ########.fr       */
+/*   Updated: 2019/02/15 16:03:46 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void		print_couple(int *couple)
 	ft_putstr(")\n");
 }
 
-static void		free_tab(int cpt)
+/*static void		free_tab(int cpt)
 {
 	int	i_cpt;
 	int i_block;
@@ -32,7 +32,8 @@ static void		free_tab(int cpt)
 		while (++i_block < 4)
 		{
 			ft_memdel((void**));
-}
+		}
+}*/
 
 static int		***malloc_tab(int cpt)
 {
@@ -56,6 +57,7 @@ static int		***malloc_tab(int cpt)
 	}
 	return (coord);
 }
+
 static int		***extract(char *s, int cpt)
 {
 	int	***coord;
@@ -81,14 +83,14 @@ static int		***extract(char *s, int cpt)
 	return (coord);
 }
 
-int				read_file(char *file_name)
+int				***read_file(char *file_name)
 {
 	int		fd;
 	char	*s;
 	char	buff[BUFF_SIZE + 1];
 	ssize_t	rd;
 	int		cpt;
-	int		***tost;
+	int		***res;
 
 	ft_memset(buff, 0, BUFF_SIZE + 1);
 	fd = open(file_name, O_RDONLY);
@@ -109,9 +111,9 @@ int				read_file(char *file_name)
 			return (0);
 		ft_memset(buff, 0, BUFF_SIZE + 1);
 	}
-//		ft_putstr(s);
-	if (!(tost = extract(s, cpt)))
+	//	ft_putstr(s);
+	if (!(res = extract(s, cpt)))
 		return (0);
-	iter_coord(tost, cpt, print_couple);
-	return (1);
+	//iter_coord(res, cpt, print_couple);
+	return (res);
 }
