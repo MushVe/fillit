@@ -6,76 +6,78 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 16:40:33 by cseguier          #+#    #+#             */
-/*   Updated: 2019/02/13 18:47:28 by cseguier         ###   ########.fr       */
+/*   Updated: 2019/02/15 11:36:40 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <fcntl.h>
 
-static int		potati(int ***wesh, int cpt)
+static void		print_couple(int *couple)
 {
-	int i = 0;
-	int j = 0;
-
-	while (i < cpt)
-	{
-		j = 0;
-		while (j < 4)
-		{
-			ft_putnbr(wesh[i][j][0]); ft_putstr("; ");
-			ft_putnbr(wesh[i][j][1]); ft_putstr("\n");
-			j++;
-		}
-		i++;
-	}
-	return (0);
+	ft_putchar('(');
+	ft_putnbr(couple[0]);
+	ft_putstr("; ");
+	ft_putnbr(couple[1]);
+	ft_putstr(")\n");
 }
 
-static int		***extract(char *s, int cpt)
+static void		free_tab(int cpt)
 {
-	int		***coord;
-	int		i;
-	int		j;
-	int		x;
+	int	i_cpt;
+	int i_block;
 
-	j = 0;
-	x = -1;
+	i_cpt = -1;
+	while (++i_cpt < cpt)
+		i_block = -1;
+		while (++i_block < 4)
+		{
+			ft_memdel((void**));
+}
+
+static int		***malloc_tab(int cpt)
+{
+	int	***coord;
+	int	i_cpt;
+	int	i_block;
+
 	if (!(coord = (int***)ft_memalloc(sizeof(int**) * cpt)))
 		return (0);
-	while (++x < cpt)
+	i_cpt = -1;
+	while (++i_cpt < cpt)
 	{
-//		ft_putstr("x: "); ft_putnbr(x); ft_putendl("");
-		if (!(coord[x] = (int**)ft_memalloc(sizeof(int*) * 4)))
+		if (!(coord[i_cpt] = (int**)ft_memalloc(sizeof(int*) * 4)))
 			return (0);
-		i = -1;
-		while (++i < 4)
+		i_block = -1;
+		while (++i_block < 4)
 		{
-//			ft_putstr("i: "); ft_putnbr(i); ft_putendl("");
-			if (!(coord[x][i] = (int*)ft_memalloc(sizeof(int) * 2)))
+			if (!(coord[i_cpt][i_block] = (int*)ft_memalloc(sizeof(int) * 2)))
 				return (0);
 		}
 	}
-	x = -1;
-	while (++x < cpt)
+	return (coord);
+}
+static int		***extract(char *s, int cpt)
+{
+	int	***coord;
+	int i_cpt;
+	int	i_block;
+	int i;
+
+	if (!(coord = malloc_tab(cpt)))
+		return (0);
+	i_cpt = -1;
+	while (++i_cpt < cpt)
 	{
-//		ft_putstr("\t\tx: "); ft_putnbr(x); ft_putendl("");
 		i = -1;
-		j = 0;
+		i_block = 0;
 		while (++i < 20)
-		{
-//			ft_putstr("i: "); ft_putnbr(i); ft_putendl("");
-			if (s[i + x * 20] == '#')
+			if (s[i + i_cpt * 20] == '#')
 			{
-//				ft_putstr("\tj: "); ft_putnbr(j); ft_putendl("");
-				coord[x][j][0] = i % 5;
-//				ft_putendl("000");
-				coord[x][j][1] = i / 5;
-				j++;
+				coord[i_cpt][i_block][0] = i % 5;
+				coord[i_cpt][i_block][1] = i / 5;
+				i_block++;
 			}
-		}
 	}
-//	ft_putendl("666");
 	return (coord);
 }
 
@@ -86,7 +88,7 @@ int				read_file(char *file_name)
 	char	buff[BUFF_SIZE + 1];
 	ssize_t	rd;
 	int		cpt;
-	int ***tost;
+	int		***tost;
 
 	ft_memset(buff, 0, BUFF_SIZE + 1);
 	fd = open(file_name, O_RDONLY);
@@ -110,6 +112,6 @@ int				read_file(char *file_name)
 //		ft_putstr(s);
 	if (!(tost = extract(s, cpt)))
 		return (0);
-	potati(tost, cpt);
+	iter_coord(tost, cpt, print_couple);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 15:11:39 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/13 13:45:44 by cseguier         ###   ########.fr       */
+/*   Updated: 2019/02/15 11:21:34 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define FILLIT_H
 
 # include "libft/libft.h"
+# include <fcntl.h>
+# include <stdlib.h>
 
 # define BUFF_SIZE 21
 
@@ -41,6 +43,8 @@ void		del_tetrimino(tetrimino **alst);
 void		iter_tetrimino(tetrimino *lst, void (*f)(tetrimino *tetri));
 
 tetrimino	*map_tetrimino(tetrimino *lst, tetrimino *(*f)(tetrimino *tetri));
+
+void		iter_coord(int ***coord, int cpt, void (*f)(int *tetri));
 
 void		move_coord(char *str);
 
