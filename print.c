@@ -6,53 +6,47 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 17:03:59 by cseguier          #+#    #+#             */
-/*   Updated: 2019/02/15 18:02:22 by cseguier         ###   ########.fr       */
+/*   Updated: 2019/02/15 19:48:04 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
+char	*init_square(int len)
+{
+	char	*res;
+	int		i;
+
+	if (!(res = ft_strnew((len + 1) * len)))
+		return (0);
+	i = -1;
+	while (++i < (len + 1) * len)
+	{
+		if (i % (len + 1) == len)
+			res[i] = '\n';
+		else
+			res[i] = '.';
+	}
+	return (res);
+}
+
 int		print(int ***coord, int len, int last_tetrimino)
 {
 	char	*res;
-	int		nb;
-	int		id;
+	int		i_block;
+	int		i_tetri;
 	int x;
 	int y;
-	int i;
 
-	if (!(res = (char*)ft_memalloc(sizeof(char) * (len * len) + 1)))
+	if (!(res = init_square(len)))
 		return (0);
-	nb = 0;
-	i = -1;
-	x = -1;
-	y = 0;
-	id = 0;
-	while (++i < (len * len) + 1)
+	i_tetri = -1;
+	while (++i_tetri < last_tetrimino)
 	{
-		if (i == len)
-			res[i] = '\n';
-		res[i] = '.';
+		i_block = -1;
+		while (++i_block < 4)
+			res[coord[i_tetri][i_block][0] + coord[i_tetri][i_block][1] * (len + 1)] = 'A' + i_tetri;
 	}
-	while ((++i < (len * len) + 1) && (id < last_tetrimino))
-	{
-		++x;
-		if ((coord[id][nb][0] == x) && (coord[id][nb][1] == y))
-		{
-			res[i] = 'A' + id;
-			if (++nb == 4)
-			{
-				i = 0;
-				nb = 0;
-				id++;
-			}
-		}
-		if (res[i] == '\n')
-		{
-			x = -1;
-			y++;
-		}
-	}
-	ft_putendl(res);
+	ft_putstr(res);
 	return (1);
 }

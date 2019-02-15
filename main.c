@@ -6,7 +6,7 @@
 /*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 17:42:59 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/15 17:57:24 by cseguier         ###   ########.fr       */
+/*   Updated: 2019/02/15 19:43:33 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		main(int ac, char **av)
 		ft_putendl("error");
 		return (0);
 	}
-	ft_putendl("");
+	print(res, 5, 4);
 	//	resolve(res);
 
 	return (0);
