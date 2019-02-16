@@ -42,6 +42,7 @@ int		main(int ac, char **av)
 		ft_putendl("error");
 		return (0);
 	}
+	resolve(res, 0);
 	print(res, 5, 4);
 	//	resolve(res);
 

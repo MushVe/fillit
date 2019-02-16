@@ -37,15 +37,17 @@ int		will_collide(int **tetri, int **frame, int i_line)
 /*
  * Si le contour (en largeur) est plus petit que la longueur du carre,
  * et si tous les blocks du tetrimino seront sur des cases vides,
- * alors on deplace
+ * alors on essaie des combinaisons de deplacements
 */
 
-void	try_translate(int ***coord, int current_tetrimino)
+int		resolve(int ***coord, int current_tetrimino)
 {
-	int i_line;
+	int	i_line;
 	int	**frame;
 	int	len;
 
+	if (coord[current_tetrimino] == 0)
+		return (1);
 	frame = get_frame(coord, current_tetrimino);
 	len = get_len(coord, current_tetrimino);
 	i_line = -1;
@@ -55,24 +57,10 @@ void	try_translate(int ***coord, int current_tetrimino)
 			&& !will_collide(coord[current_tetrimino], frame, i_line))
 		{
 			translate(coord, current_tetrimino, frame[0][i_line], i_line);
-			return ;
+			if (resolve(coord, current_tetrimino + 1))
+				return (1);
+			translate(coord, current_tetrimino, -frame[0][i_line], -i_line);
 		}
 	}
-}
-
-int		resolve(int ***coord, int cpt)
-{
-	int	finished;
-	int	i_tetri;
-
-	finished = 0;
-	i_tetri = 0;
-	while (!finished)
-	{
-		try_translate(coord, i_tetri);
-		i_tetri++;
-		if (i_tetri == cpt)
-			finished = 1;
-	}
-	return (1);
+	return (0);
 }

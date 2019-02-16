@@ -41,8 +41,9 @@ static int		***malloc_tab(int cpt)
 	int	i_cpt;
 	int	i_block;
 
-	if (!(coord = (int***)ft_memalloc(sizeof(int**) * cpt)))
+	if (!(coord = (int***)ft_memalloc(sizeof(int**) * (cpt + 1))))
 		return (0);
+	coord[cpt] = 0;
 	i_cpt = -1;
 	while (++i_cpt < cpt)
 	{

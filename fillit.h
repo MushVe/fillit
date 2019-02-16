@@ -60,6 +60,6 @@ int			**get_frame(int ***coord, int current_tetrimino);
 
 int			print(int ***coord, int len, int last_tetrimino);
 
-//int			resolve(int ***src);
+int			resolve(int ***coord, int current_tetrimino);
 
 #endif
