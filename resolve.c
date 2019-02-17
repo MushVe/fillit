@@ -53,9 +53,11 @@ int		resolve(int ***coord, int current_tetrimino)
 	i_line = -1;
 	while (++i_line < len)
 	{
-		if (frame[0][i_line] < len
-			&& !will_collide(coord[current_tetrimino], frame, i_line))
+//		if (frame[0][i_line] < len
+//			&& 
+		if (!will_collide(coord[current_tetrimino], frame, i_line))
 		{
+			ft_putstr("lol");
 			translate(coord, current_tetrimino, frame[0][i_line], i_line);
 			if (resolve(coord, current_tetrimino + 1))
 				return (1);

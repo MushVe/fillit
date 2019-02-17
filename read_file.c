@@ -115,6 +115,6 @@ int				***read_file(char *file_name)
 	//	ft_putstr(s);
 	if (!(res = extract(s, cpt)))
 		return (0);
-	//iter_coord(res, cpt, print_couple);
+//	iter_coord(res, print_couple);
 	return (res);
 }

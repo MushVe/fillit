@@ -12,15 +12,17 @@
 
 #include "fillit.h"
 
-void		iter_coord(int ***coord, int cpt, void (*f)(int *tetri))
+void		iter_coord(int ***coord, void (*f)(int *tetri))
 {
-	int i;
+	int	i_tetri;
+	int	i_block;
 
-	while (cpt--)
+	i_tetri = -1;
+	while (coord[++i_tetri] != 0)
 	{
-		i = -1;
-		while (++i < 4)
-			f(coord[cpt][i]);
+		i_block = -1;
+		while (++i_block < 4)
+			f(coord[i_tetri][i_block]);
 	}
 }
 

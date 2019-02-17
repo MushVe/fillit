@@ -31,6 +31,10 @@ int	search_empty(int ***coord, int col, int current_tetrimino, int xy)
 	return (empty + 1);
 }
 
+/*
+**	len = longueur du carre
+*/
+
 int	get_len(int ***coord, int current_tetrimino)
 {
 	int i_tetri;

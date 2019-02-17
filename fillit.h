@@ -44,7 +44,7 @@ void		iter_tetrimino(tetrimino *lst, void (*f)(tetrimino *tetri));
 
 tetrimino	*map_tetrimino(tetrimino *lst, tetrimino *(*f)(tetrimino *tetri));
 
-void		iter_coord(int ***coord, int cpt, void (*f)(int *tetri));
+void		iter_coord(int ***coord, void (*f)(int *tetri));
 
 void		translate(int ***coord, int current_tetrimino, int plus_x, int plus_y);
 
@@ -58,7 +58,7 @@ int			get_len(int ***coord, int current_tetrimino);
 
 int			**get_frame(int ***coord, int current_tetrimino);
 
-int			print(int ***coord, int len, int last_tetrimino);
+int			print(int ***coord, int len);
 
 int			resolve(int ***coord, int current_tetrimino);
 

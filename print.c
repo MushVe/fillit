@@ -30,18 +30,16 @@ char	*init_square(int len)
 	return (res);
 }
 
-int		print(int ***coord, int len, int last_tetrimino)
+int		print(int ***coord, int len)
 {
 	char	*res;
-	int		i_block;
-	int		i_tetri;
-	int x;
-	int y;
+	int	i_block;
+	int	i_tetri;
 
 	if (!(res = init_square(len)))
 		return (0);
 	i_tetri = -1;
-	while (++i_tetri < last_tetrimino)
+	while (coord[++i_tetri] != 0)
 	{
 		i_block = -1;
 		while (++i_block < 4)

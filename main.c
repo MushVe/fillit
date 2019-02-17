@@ -43,7 +43,7 @@ int		main(int ac, char **av)
 		return (0);
 	}
 	resolve(res, 0);
-	print(res, 5, 4);
+	print(res, 5);
 	//	resolve(res);
 
 	return (0);
