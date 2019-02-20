@@ -6,15 +6,15 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 13:22:07 by cseguier          #+#    #+#             */
-/*   Updated: 2019/02/20 17:46:30 by czhang           ###   ########.fr       */
+/*   Updated: 2019/02/20 18:35:04 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
 /*
- * Pour comprendre cette fonction il faut se representer
- * les differentes valeurs sur un dessin du carre avec frame
+* Pour comprendre cette fonction il faut se representer
+* les differentes valeurs sur un dessin du carre avec frame
 */
 
 int		will_collide(int **tetri, int **frame, int i_line)
@@ -35,17 +35,34 @@ int		will_collide(int **tetri, int **frame, int i_line)
 }
 
 /*
- * Si le contour (en largeur) est plus petit que la longueur du carre,
- * et si tous les blocks du tetrimino seront sur des cases vides,
- * alors on essaie des combinaisons de deplacements
+* Si le contour (en largeur) est plus petit que la longueur du carre,
+* et si tous les blocks du tetrimino seront sur des cases vides,
+* alors on essaie des combinaisons de deplacements
 */
+
+int		is_occupied(int ***coord, int c_tetri, int c_block)
+{
+	int	i_tetri;
+	int	i_block;
+
+	i_tetri = -1;
+	while (++i_tetri < c_tetri)
+	{
+		i_block = -1;
+		while (++i_block < 4)
+			if (coord[i_tetri][i_block][0] == coord[c_tetri][c_block][0]
+				&& coord[i_tetri][i_block][1] == coord[c_tetri][c_block][1])
+				return (1);
+	}
+	return (0);
+}
 
 void	ft_test(char *str, int i)
 {
 	ft_putstr(str);
 	ft_putstr(" : ");
 	ft_putnbr(i);
-	ft_putendl("");	
+	ft_putendl("");
 }
 
 int		resolve(int ***coord, int current_tetrimino)
@@ -63,8 +80,6 @@ int		resolve(int ***coord, int current_tetrimino)
 	i = 0;
 	while (++i_line < len)
 	{
-//		if (frame[0][i_line] < len
-//			&&
 		if (!will_collide(coord[current_tetrimino], frame, i_line))
 		{
 			ft_test("i_line", i_line);

@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 16:40:33 by cseguier          #+#    #+#             */
-/*   Updated: 2019/02/15 16:03:46 by cseguier         ###   ########.fr       */
+/*   Updated: 2019/02/20 18:45:13 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int				***read_file(char *file_name)
 	s = "\0";
 	while (0 < (rd = read(fd, buff, BUFF_SIZE)))
 	{
-		if (rd == -1)
+		if ((rd == -1) || (buff[20] = '\0' && rd != 0))
 			return (0);
 		if (buff[19] == '\n' && buff[20] == '\n')
 			buff[20] = '\0';
@@ -107,14 +107,11 @@ int				***read_file(char *file_name)
 			return (0);
 		cpt++;
 		move_coord(buff);
-		//		ft_putstr(buff);
 		if (!(s = ft_strjoin(buff, s)))
 			return (0);
 		ft_memset(buff, 0, BUFF_SIZE + 1);
 	}
-	//	ft_putstr(s);
 	if (!(res = extract(s, cpt)))
 		return (0);
-//	iter_coord(res, print_couple);
 	return (res);
 }

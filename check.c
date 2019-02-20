@@ -6,7 +6,7 @@
 /*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 15:02:42 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/12 17:56:25 by cseguier         ###   ########.fr       */
+/*   Updated: 2019/02/20 18:30:31 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	count_sharp(char *str)
 
 int	neighbors(char *str)
 {
-	int i;
+	int	i;
 	int	count;
 
 	i = -1;
@@ -50,7 +50,7 @@ int	neighbors(char *str)
 	return (0);
 }
 
-int			is_tetrimino(char *str)
+int	is_tetrimino(char *str)
 {
 	int	i;
 

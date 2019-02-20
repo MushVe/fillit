@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*    move_coord.c                                      :+:      :+:    :+:   */
+/*   move_coord.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 17:41:40 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/15 10:32:35 by czhang           ###   ########.fr       */
+/*   Updated: 2019/02/20 18:33:37 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static int		is_empty_line(char *str, int i)
+static int	is_empty_line(char *str, int i)
 {
-	int j;
+	int	j;
 
 //	if (i % 5 != 0)
 //		return (-1);
@@ -26,9 +26,9 @@ static int		is_empty_line(char *str, int i)
 	return (0);
 }
 
-static int		is_empty_column(char *str, int i)
+static int	is_empty_column(char *str, int i)
 {
-	int j;
+	int	j;
 
 //	if (i > 4)
 //		return (-1);
@@ -40,11 +40,11 @@ static int		is_empty_column(char *str, int i)
 	return (0);
 }
 
-static void			move_up(char *str)
+static void	move_up(char *str)
 {
-	int		i;
-	int		n_lines;
-	int		j;
+	int	i;
+	int	n_lines;
+	int	j;
 
 	i = 0;
 	n_lines = 0;
@@ -65,7 +65,7 @@ static void			move_up(char *str)
 			str[j] = '.';
 }
 
-static void			move_left(char *str)
+static void	move_left(char *str)
 {
 	int	n_col;
 	int	j;
@@ -79,14 +79,15 @@ static void			move_left(char *str)
 	line = -1;
 	while (++line < 4)
 	{
-		ft_memmove((void*)str + line * 5, (const void*)str + line * 5 + n_col, 4 - n_col);
+		ft_memmove((void*)str + line * 5,
+			(const void*)str + line * 5 + n_col, 4 - n_col);
 		j = n_col;
 		while (j > 0)
 			str[line * 5 + 4 - j--] = '.';
 	}
 }
 
-void			move_coord(char *str)
+void		move_coord(char *str)
 {
 	move_up(str);
 	move_left(str);
