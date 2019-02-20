@@ -6,7 +6,7 @@
 /*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 10:25:54 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/20 18:31:41 by cseguier         ###   ########.fr       */
+/*   Updated: 2019/02/20 19:02:19 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,11 @@ int	get_len(int ***coord, int current_tetrimino)
 	return (max + 1);
 }
 
-/*
+/* 
 **	Frame est le contour des tetriminos deja places
 */
 
+/*
 int	**get_frame(int ***coord, int current_tetrimino)
 {
 	int **frame;
@@ -85,4 +86,53 @@ int	**get_frame(int ***coord, int current_tetrimino)
 		len--;
 	}
 	return (frame);
+}
+*/
+
+int	**init_frame(int len)
+{
+	int	**frame;
+	int	i;
+
+	if (!(frame = (int**)ft_memalloc(sizeof(int*) * 2)))
+		return (0);
+	if (!(frame[0] = (int*)ft_memalloc(sizeof(int) * (len + 1))))
+		return (0);
+	if (!(frame[1] = (int*)ft_memalloc(sizeof(int) * (len + 1))))
+		return (0);
+	i = -1;
+	while (++i < len)
+	{
+		frame[0][i] = 0;
+		frame[1][i] = 0;
+	}
+	frame[0][i] = -1;
+	frame[1][i] = -1;
+	return (frame);
+}
+
+int	**dup_frame(int **frame, int len)
+{
+	int	**dup;
+	int	i;
+
+	dup = init_frame(len);
+	i = -1;
+	while (frame[0][++i] != -1)
+	{
+		dup[0][i] = frame[0][i];
+		dup[1][i] = frame[1][i];
+	}
+	return (dup);
+}
+
+int	**get_frame(int tetri, int len)
+{
+	int	**frame;
+	int	**dup;
+
+	if (tetri == 0)
+		return (init_frame(int len));
+	dup = dup_frame(frame, len);
+
 }
