@@ -6,7 +6,7 @@
 /*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 17:42:59 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/15 19:43:33 by czhang           ###   ########.fr       */
+/*   Updated: 2019/02/20 16:55:59 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		main(int ac, char **av)
 		return (0);
 	}
 	resolve(res, 0);
-	print(res, 5);
+//	print(res, 5, 0);
 	//	resolve(res);
 
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 13:22:07 by cseguier          #+#    #+#             */
-/*   Updated: 2019/02/15 21:28:04 by czhang           ###   ########.fr       */
+/*   Updated: 2019/02/20 17:46:30 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,28 +40,41 @@ int		will_collide(int **tetri, int **frame, int i_line)
  * alors on essaie des combinaisons de deplacements
 */
 
+void	ft_test(char *str, int i)
+{
+	ft_putstr(str);
+	ft_putstr(" : ");
+	ft_putnbr(i);
+	ft_putendl("");	
+}
+
 int		resolve(int ***coord, int current_tetrimino)
 {
 	int	i_line;
 	int	**frame;
 	int	len;
+	int	i;
 
 	if (coord[current_tetrimino] == 0)
 		return (1);
 	frame = get_frame(coord, current_tetrimino);
 	len = get_len(coord, current_tetrimino);
 	i_line = -1;
+	i = 0;
 	while (++i_line < len)
 	{
 //		if (frame[0][i_line] < len
-//			&& 
+//			&&
 		if (!will_collide(coord[current_tetrimino], frame, i_line))
 		{
-			ft_putstr("lol");
+			ft_test("i_line", i_line);
 			translate(coord, current_tetrimino, frame[0][i_line], i_line);
+			print(coord, 5, current_tetrimino + 1);
+			ft_putendl("");
 			if (resolve(coord, current_tetrimino + 1))
 				return (1);
 			translate(coord, current_tetrimino, -frame[0][i_line], -i_line);
+			ft_putendl("fail");
 		}
 	}
 	return (0);

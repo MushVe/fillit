@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 17:03:59 by cseguier          #+#    #+#             */
-/*   Updated: 2019/02/15 19:48:04 by czhang           ###   ########.fr       */
+/*   Updated: 2019/02/20 17:02:20 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*init_square(int len)
 	return (res);
 }
 
-int		print(int ***coord, int len)
+int		print(int ***coord, int len, int current_tetri)
 {
 	char	*res;
 	int	i_block;
@@ -39,12 +39,20 @@ int		print(int ***coord, int len)
 	if (!(res = init_square(len)))
 		return (0);
 	i_tetri = -1;
-	while (coord[++i_tetri] != 0)
-	{
-		i_block = -1;
-		while (++i_block < 4)
-			res[coord[i_tetri][i_block][0] + coord[i_tetri][i_block][1] * (len + 1)] = 'A' + i_tetri;
-	}
+	if (current_tetri == -1)
+		while (coord[++i_tetri] != 0)
+		{
+			i_block = -1;
+			while (++i_block < 4)
+				res[coord[i_tetri][i_block][0] + coord[i_tetri][i_block][1] * (len + 1)] = 'A' + i_tetri;
+		}
+	else
+		while (++i_tetri < current_tetri)
+		{
+			i_block = -1;
+			while (++i_block < 4)
+				res[coord[i_tetri][i_block][0] + coord[i_tetri][i_block][1] * (len + 1)] = 'A' + i_tetri;
+		}
 	ft_putstr(res);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 10:25:54 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/15 21:07:17 by czhang           ###   ########.fr       */
+/*   Updated: 2019/02/20 17:46:37 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int	search_empty(int ***coord, int col, int current_tetrimino, int xy)
 	{
 		i_block = -1;
 		while (++i_block < 4)
-			if (coord[i_tetrimino][i_block][!xy] == col &&
-					coord[i_tetrimino][i_block][xy] > empty)
+			if (coord[i_tetrimino][i_block][!xy] == col
+				&& coord[i_tetrimino][i_block][xy] > empty)
 				empty = coord[i_tetrimino][i_block][xy];
 	}
-	return (empty + 1);
+	return (empty);
 }
 
 /*
@@ -42,6 +42,7 @@ int	get_len(int ***coord, int current_tetrimino)
 	int max;
 
 	i_tetri = -1;
+	max = 0;
 	while (++i_tetri < current_tetrimino)
 	{
 		i_block = -1;
@@ -66,6 +67,7 @@ int	**get_frame(int ***coord, int current_tetrimino)
 	int i;
 	int len;
 
+	ft_test("curr_tetr", current_tetrimino);
 	len = get_len(coord, current_tetrimino);
 	if (!(frame = (int**)ft_memalloc(sizeof(int*) * 2)))
 		return (0);
@@ -73,10 +75,14 @@ int	**get_frame(int ***coord, int current_tetrimino)
 		return (0);
 	if (!(frame[1] = (int*)ft_memalloc(sizeof(int) * len)))
 		return (0);
-	while (len--)
+	ft_test("len", len);
+	while (len >= 0)
 	{
 		frame[0][len] = search_empty(coord, len, current_tetrimino, 0);
 		frame[1][len] = search_empty(coord, len, current_tetrimino, 1);
+		ft_test("frame[0][len]", frame[0][len]);
+		ft_test("frame[1][len]", frame[1][len]);
+		len--;
 	}
 	return (frame);
 }

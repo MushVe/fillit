@@ -6,7 +6,7 @@
 /*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 15:11:39 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/15 21:00:25 by czhang           ###   ########.fr       */
+/*   Updated: 2019/02/20 17:46:35 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,10 @@ int			get_len(int ***coord, int current_tetrimino);
 
 int			**get_frame(int ***coord, int current_tetrimino);
 
-int			print(int ***coord, int len);
+int			print(int ***coord, int len, int current_tetrimino);
 
 int			resolve(int ***coord, int current_tetrimino);
+
+void		ft_test(char *str, int i);
 
 #endif
