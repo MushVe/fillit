@@ -6,7 +6,7 @@
 /*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 10:25:54 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/21 09:26:42 by cseguier         ###   ########.fr       */
+/*   Updated: 2019/02/21 10:27:59 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	search_empty(int ***coord, int col, int current_tetrimino, int xy)
 }
 
 /*
-**	len = longueur du carre
+*	len = longueur du carre
 */
 
 int	get_len(int ***coord, int current_tetrimino)
@@ -58,10 +58,10 @@ int	get_len(int ***coord, int current_tetrimino)
 }
 
 /*
-**	Frame est le contour des tetriminos deja places
+*	Frame est le contour des tetriminos deja places
 */
 
-/*
+
 int	**get_frame(int ***coord, int current_tetrimino)
 {
 	int **frame;
@@ -87,7 +87,7 @@ int	**get_frame(int ***coord, int current_tetrimino)
 	}
 	return (frame);
 }
-*/
+
 
 int	**init_frame(int len)
 {
