@@ -6,7 +6,7 @@
 /*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 10:25:54 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/20 19:02:19 by czhang           ###   ########.fr       */
+/*   Updated: 2019/02/21 09:26:42 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	get_len(int ***coord, int current_tetrimino)
 	return (max + 1);
 }
 
-/* 
+/*
 **	Frame est le contour des tetriminos deja places
 */
 
@@ -132,7 +132,7 @@ int	**get_frame(int tetri, int len)
 	int	**dup;
 
 	if (tetri == 0)
-		return (init_frame(int len));
+		return (init_frame(len));
 	dup = dup_frame(frame, len);
 
 }

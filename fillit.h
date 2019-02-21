@@ -6,7 +6,7 @@
 /*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 15:11:39 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/20 18:23:19 by cseguier         ###   ########.fr       */
+/*   Updated: 2019/02/21 09:42:01 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void		del_tetrimino(tetrimino **alst);
 void		iter_tetrimino(tetrimino *lst, void (*f)(tetrimino *tetri));
 tetrimino	*map_tetrimino(tetrimino *lst, tetrimino *(*f)(tetrimino *tetri));
 void		iter_coord(int ***coord, void (*f)(int *tetri));
-void		translate(int ***coord, int current_tetrimino, int plus_x, int plus_y);
+void		translate(int ***coord, int crt_tetrimino, int plus_x, int plus_y);
 void		move_coord(char *str);
 int			***read_file(char *file_name);
 int			search_empty(int ***coord, int col, int current_tetrimino, int y);
