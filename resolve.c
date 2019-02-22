@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 13:22:07 by cseguier          #+#    #+#             */
-/*   Updated: 2019/02/20 18:35:04 by cseguier         ###   ########.fr       */
+/*   Updated: 2019/02/22 11:19:52 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,28 @@
 * les differentes valeurs sur un dessin du carre avec frame
 */
 
-int		will_collide(int **tetri, int **frame, int i_line)
+int		will_collide(int ***coord, int current_tetri)
 {
-	int i_block1;
-	int i_block2;
+	int	prev_tetri;
+	int block_newtet;
+	int block_prevtet;
 
-	i_block1 = -1;
-	while (++i_block1 < 4)
+	block_newtet = -1;
+	while (++block_newtet < 4)
 	{
-		i_block2 = -1;
-		while (++i_block2 < 4)
-			if (frame[0][tetri[i_block1][1] + i_line]
-					> tetri[i_block2][1] + frame[0][i_line])
-				return (1);
+		prev_tetri = -1;
+		while (++prev_tetri < current_tetri)
+		{
+			block_prevtet = -1;
+			while (++block_prevtet < 4)
+				if (coord[current_tetri][block_newtet][0] == coord[prev_tetri][block_prevtet][0]
+					|| coord[current_tetri][block_newtet][1] == coord[prev_tetri][block_prevtet][1])
+					return (1);
+		}
 	}
 	return (0);
 }
+
 
 /*
 * Si le contour (en largeur) est plus petit que la longueur du carre,
