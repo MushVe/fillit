@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 16:40:33 by cseguier          #+#    #+#             */
-/*   Updated: 2019/02/20 18:45:13 by cseguier         ###   ########.fr       */
+/*   Updated: 2019/02/22 15:35:24 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int				***read_file(char *file_name)
 			return (0);
 		cpt++;
 		move_coord(buff);
-		if (!(s = ft_strjoin(buff, s)))
+		if (!(s = ft_strjoin(s, buff)))
 			return (0);
 		ft_memset(buff, 0, BUFF_SIZE + 1);
 	}
