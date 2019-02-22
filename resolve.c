@@ -6,13 +6,25 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 13:22:07 by cseguier          #+#    #+#             */
-/*   Updated: 2019/02/22 16:21:09 by cseguier         ###   ########.fr       */
+/*   Updated: 2019/02/22 18:04:13 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		will_collide(int ***coord, int current_tetri)
+static void	translate(int ***coord, int crnt_tetrimino, int x, int y)
+{
+	int i_block;
+	
+	i_block = -1;
+	while (++i_block < 4)
+	{
+		coord[crnt_tetrimino][i_block][0] += x;
+		coord[crnt_tetrimino][i_block][1] += y;
+	}		
+}
+
+static int	will_collide(int ***coord, int current_tetri)
 {
 	int	prev_tetri;
 	int block_newtet;
@@ -36,17 +48,7 @@ int		will_collide(int ***coord, int current_tetri)
 	return (0);
 }
 
-int		get_nb_tetri(int ***coord)
-{
-	int	nb;
-
-	nb = 0;
-	while (coord[nb] != 0)
-		nb++;
-	return (nb);
-}
-
-int		g_max(int **current, int xy)
+static int	max(int **current, int xy)
 {
 	int	max;
 	int	i_block;
@@ -61,14 +63,14 @@ int		g_max(int **current, int xy)
 	return (max);
 }
 
-int		resolve(int ***crd, int crnt, int len, int y)
+int			resolve(int ***crd, int crnt, int len, int y)
 {
 	int	x;
 
 	x = 0;
 	if (crd[crnt] == 0)
 		return (1);
-	while (len > (x + g_max(crd[crnt], 0)) && len > (y + g_max(crd[crnt], 1)))
+	while (len > (x + max(crd[crnt], 0)) && len > (y + max(crd[crnt], 1)))
 	{
 		translate(crd, crnt, x, y);
 		if (will_collide(crd, crnt))
@@ -79,7 +81,7 @@ int		resolve(int ***crd, int crnt, int len, int y)
 				return (1);
 			translate(crd, crnt, -x, -y);
 		}
-		if ((x + g_max(crd[crnt], 0)) < len - 1)
+		if ((x + max(crd[crnt], 0)) < len - 1)
 			x++;
 		else
 		{

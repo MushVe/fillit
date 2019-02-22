@@ -6,13 +6,13 @@
 /*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 15:02:42 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/20 18:30:31 by cseguier         ###   ########.fr       */
+/*   Updated: 2019/02/22 17:45:22 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int	is_valid_char(char c, int i)
+static int	is_valid_char(char c, int i)
 {
 	if ((i % 5) == 4)
 		return (c == '\n');
@@ -20,7 +20,7 @@ int	is_valid_char(char c, int i)
 		return ((c == '.') || (c == '#'));
 }
 
-int	count_sharp(char *str)
+static int	count_sharp(char *str)
 {
 	if (*str == '\0')
 		return (0);
@@ -30,7 +30,7 @@ int	count_sharp(char *str)
 		return (count_sharp(str + 1));
 }
 
-int	neighbors(char *str)
+static int	neighbors(char *str)
 {
 	int	i;
 	int	count;
