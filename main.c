@@ -6,7 +6,7 @@
 /*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 17:42:59 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/20 16:55:59 by czhang           ###   ########.fr       */
+/*   Updated: 2019/02/22 11:37:42 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	print_test(char *str)
 
 int		main(int ac, char **av)
 {
-	int ***res;
+	int ***coord;
 
 	if (ac != 2)
 	{
@@ -37,14 +37,14 @@ int		main(int ac, char **av)
 		return (0);
 	}
 
-	if (!(res = read_file(av[1])))
+	if (!(coord = read_file(av[1])))
 	{
 		ft_putendl("error");
 		return (0);
 	}
-	resolve(res, 0);
-//	print(res, 5, 0);
-	//	resolve(res);
+	resolve(coord, 0, get_nb_tetri(coord) * 2);
+//	print(coord, 5, 0);
+	//	resolve(coord);
 
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 13:22:07 by cseguier          #+#    #+#             */
-/*   Updated: 2019/02/22 11:19:52 by czhang           ###   ########.fr       */
+/*   Updated: 2019/02/22 12:02:10 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,25 @@ int		will_collide(int ***coord, int current_tetri)
 		{
 			block_prevtet = -1;
 			while (++block_prevtet < 4)
-				if (coord[current_tetri][block_newtet][0] == coord[prev_tetri][block_prevtet][0]
-					|| coord[current_tetri][block_newtet][1] == coord[prev_tetri][block_prevtet][1])
+				if (coord[current_tetri][block_newtet][0]
+					== coord[prev_tetri][block_prevtet][0]
+					&& coord[current_tetri][block_newtet][1]
+					== coord[prev_tetri][block_prevtet][1])
 					return (1);
 		}
 	}
 	return (0);
 }
 
+int		get_nb_tetri(int ***coord)
+{
+	int	nb;
+
+	nb = 0;
+	while (coord[nb] != 0)
+		nb++;
+	return (nb);
+}
 
 /*
 * Si le contour (en largeur) est plus petit que la longueur du carre,
@@ -71,32 +82,17 @@ void	ft_test(char *str, int i)
 	ft_putendl("");
 }
 
-int		resolve(int ***coord, int current_tetrimino)
+int		resolve(int ***coord, int current_tetrimino, int len)
 {
-	int	i_line;
-	int	**frame;
-	int	len;
-	int	i;
-
 	if (coord[current_tetrimino] == 0)
 		return (1);
-	frame = get_frame(coord, current_tetrimino);
-	len = get_len(coord, current_tetrimino);
-	i_line = -1;
-	i = 0;
-	while (++i_line < len)
-	{
-		if (!will_collide(coord[current_tetrimino], frame, i_line))
-		{
-			ft_test("i_line", i_line);
-			translate(coord, current_tetrimino, frame[0][i_line], i_line);
-			print(coord, 5, current_tetrimino + 1);
-			ft_putendl("");
-			if (resolve(coord, current_tetrimino + 1))
-				return (1);
-			translate(coord, current_tetrimino, -frame[0][i_line], -i_line);
-			ft_putendl("fail");
-		}
-	}
+
+
+
+
+
+
+
+
 	return (0);
 }
