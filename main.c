@@ -6,7 +6,7 @@
 /*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 17:42:59 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/22 11:37:42 by cseguier         ###   ########.fr       */
+/*   Updated: 2019/02/22 15:31:44 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	print_test(char *str)
 int		main(int ac, char **av)
 {
 	int ***coord;
+	int	len;
 
 	if (ac != 2)
 	{
@@ -42,9 +43,11 @@ int		main(int ac, char **av)
 		ft_putendl("error");
 		return (0);
 	}
-	resolve(coord, 0, get_nb_tetri(coord) * 2);
-//	print(coord, 5, 0);
-	//	resolve(coord);
 
+//	len = get_nb_tetri(coord) * 2;
+	len = 2;
+	while (!resolve(coord, 0, len))
+		len++;
+	print(coord, len, -1);
 	return (0);
 }

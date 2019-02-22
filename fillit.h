@@ -6,7 +6,7 @@
 /*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 15:11:39 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/22 11:37:40 by cseguier         ###   ########.fr       */
+/*   Updated: 2019/02/22 14:33:10 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void		move_coord(char *str);
 int			***read_file(char *file_name);
 int			search_empty(int ***coord, int col, int current_tetrimino, int y);
 int			get_len(int ***coord, int current_tetrimino);
-int			**get_frame(int ***coord, int current_tetrimino);
+
 int			print(int ***coord, int len, int current_tetrimino);
 int			resolve(int ***coord, int current_tetrimino, int len);
 void		ft_test(char *str, int i);
