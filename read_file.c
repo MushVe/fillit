@@ -6,34 +6,11 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 16:40:33 by cseguier          #+#    #+#             */
-/*   Updated: 2019/02/22 15:35:24 by cseguier         ###   ########.fr       */
+/*   Updated: 2019/02/22 16:06:30 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-static void		print_couple(int *couple)
-{
-	ft_putchar('(');
-	ft_putnbr(couple[0]);
-	ft_putstr("; ");
-	ft_putnbr(couple[1]);
-	ft_putstr(")\n");
-}
-
-/*static void		free_tab(int cpt)
-{
-	int	i_cpt;
-	int i_block;
-
-	i_cpt = -1;
-	while (++i_cpt < cpt)
-		i_block = -1;
-		while (++i_block < 4)
-		{
-			ft_memdel((void**));
-		}
-}*/
 
 static int		***malloc_tab(int cpt)
 {
@@ -84,18 +61,14 @@ static int		***extract(char *s, int cpt)
 	return (coord);
 }
 
-int				***read_file(char *file_name)
+int				***read_file(int fd, int cpt)
 {
-	int		fd;
 	char	*s;
 	char	buff[BUFF_SIZE + 1];
 	ssize_t	rd;
-	int		cpt;
 	int		***res;
 
 	ft_memset(buff, 0, BUFF_SIZE + 1);
-	fd = open(file_name, O_RDONLY);
-	cpt = 0;
 	s = "\0";
 	while (0 < (rd = read(fd, buff, BUFF_SIZE)))
 	{

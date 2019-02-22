@@ -6,7 +6,7 @@
 /*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 17:41:40 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/20 18:33:37 by cseguier         ###   ########.fr       */
+/*   Updated: 2019/02/22 15:44:35 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static int	is_empty_line(char *str, int i)
 {
 	int	j;
 
-//	if (i % 5 != 0)
-//		return (-1);
 	j = 0;
 	while (j < 4 && str[i + j] == '.')
 		j++;
@@ -30,8 +28,6 @@ static int	is_empty_column(char *str, int i)
 {
 	int	j;
 
-//	if (i > 4)
-//		return (-1);
 	j = 0;
 	while (j < 4 && str[i + j * 5] == '.')
 		j++;
