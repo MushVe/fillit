@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 13:22:07 by cseguier          #+#    #+#             */
-/*   Updated: 2019/02/22 15:48:40 by cseguier         ###   ########.fr       */
+/*   Updated: 2019/02/22 16:21:09 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		get_nb_tetri(int ***coord)
 	return (nb);
 }
 
-int		get_max(int **current, int xy)
+int		g_max(int **current, int xy)
 {
 	int	max;
 	int	i_block;
@@ -61,23 +61,25 @@ int		get_max(int **current, int xy)
 	return (max);
 }
 
-int		resolve(int ***coord, int current, int len, int x, int y)
+int		resolve(int ***crd, int crnt, int len, int y)
 {
-	if (coord[current] == 0)
+	int	x;
+
+	x = 0;
+	if (crd[crnt] == 0)
 		return (1);
-	while (len > (x + get_max(coord[current], 0))
-			&& len > (y + get_max(coord[current], 1)))
+	while (len > (x + g_max(crd[crnt], 0)) && len > (y + g_max(crd[crnt], 1)))
 	{
-		translate(coord, current, x, y);
-		if (will_collide(coord, current))
-			translate(coord, current, -x, -y);
+		translate(crd, crnt, x, y);
+		if (will_collide(crd, crnt))
+			translate(crd, crnt, -x, -y);
 		else
 		{
-			if (resolve(coord, current + 1, len, 0, 0))
+			if (resolve(crd, crnt + 1, len, 0))
 				return (1);
-			translate(coord, current, -x, -y);
+			translate(crd, crnt, -x, -y);
 		}
-		if ((x + get_max(coord[current], 0)) < len - 1)
+		if ((x + g_max(crd[crnt], 0)) < len - 1)
 			x++;
 		else
 		{
