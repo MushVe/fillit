@@ -6,13 +6,13 @@
 /*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 17:42:59 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/22 18:00:21 by czhang           ###   ########.fr       */
+/*   Updated: 2019/02/22 18:29:54 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static void	free_tab(int ***coord)
+void		free_tab(int ***coord)
 {
 	int	i_tetri;
 	int	i_block;
@@ -95,5 +95,5 @@ int			main(int ac, char **av)
 		len++;
 	print(coord, len);
 	free_tab(coord);
-	return (0);
+	return (1);
 }

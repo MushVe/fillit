@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 13:22:07 by cseguier          #+#    #+#             */
-/*   Updated: 2019/02/22 18:04:13 by czhang           ###   ########.fr       */
+/*   Updated: 2019/02/22 18:17:33 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 static void	translate(int ***coord, int crnt_tetrimino, int x, int y)
 {
 	int i_block;
-	
+
 	i_block = -1;
 	while (++i_block < 4)
 	{
 		coord[crnt_tetrimino][i_block][0] += x;
 		coord[crnt_tetrimino][i_block][1] += y;
-	}		
+	}
 }
 
 static int	will_collide(int ***coord, int current_tetri)

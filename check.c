@@ -6,7 +6,7 @@
 /*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/09 15:02:42 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/22 17:45:22 by czhang           ###   ########.fr       */
+/*   Updated: 2019/02/22 18:18:02 by czhang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	neighbors(char *str)
 	return (0);
 }
 
-int	is_tetrimino(char *str)
+int			is_tetrimino(char *str)
 {
 	int	i;
 
