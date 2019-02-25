@@ -6,7 +6,7 @@
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 16:40:33 by cseguier          #+#    #+#             */
-/*   Updated: 2019/02/22 18:31:36 by czhang           ###   ########.fr       */
+/*   Updated: 2019/02/25 16:42:40 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,12 @@ static int		***extract(char *s, int cpt)
 	while (++i_cpt < cpt)
 	{
 		i = -1;
-		i_block = 0;
+		i_block = -1;
 		while (++i < 20)
-			if (s[i + i_cpt * 20] == '#')
+			if ((s[i + i_cpt * 20] == '#') && (++i_block < 4))
 			{
 				coord[i_cpt][i_block][0] = i % 5;
 				coord[i_cpt][i_block][1] = i / 5;
-				i_block++;
 			}
 	}
 	return (coord);
@@ -85,25 +84,25 @@ static char		*dupjoinfree(char *s, const char *buff)
 int				***read_file(int fd, int cpt)
 {
 	char	*s;
-	char	buff[21 + 1];
+	char	buff[21];
 	ssize_t	rd;
 	int		***coord;
 
-	ft_memset(buff, 0, 21 + 1);
+	ft_memset(buff, 0, 21);
 	s = ft_strnew(0);
-	while (0 < (rd = read(fd, buff, 21)))
+	while (1)
 	{
-		if ((rd == -1) || (buff[20] = '\0' && rd != 0))
-			return (free_cs(0, s));
-		if (buff[19] == '\n' && buff[20] == '\n')
-			buff[20] = '\0';
-		if (!is_tetrimino(buff))
+		if (-1 == (rd = read(fd, buff, 20)) || !is_tetrimino(buff))
 			return (free_cs(0, s));
 		cpt++;
 		normalize_tetri(buff);
 		if (!(s = dupjoinfree(s, buff)))
 			return (free_cs(0, s));
-		ft_memset(buff, 0, 21 + 1);
+		ft_memset(buff, 0, 21);
+		if (0 == (rd = read(fd, buff, 1)))
+			break ;
+		if (buff[0] != '\n')
+			return (0);
 	}
 	if (!(coord = extract(s, cpt)))
 		return (free_cs(coord, s));
