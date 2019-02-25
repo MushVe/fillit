@@ -12,23 +12,37 @@
 
 #include "fillit.h"
 
-static void	translate(int ***coord, int crnt_tetrimino, int x, int y)
+static void	translate(int ***coord, int crnt, int x, int y)
 {
-	int i_block;
+	int	ib;
 
-	i_block = -1;
-	while (++i_block < 4)
+	ib = -1;
+	while (++ib < 4)
 	{
-		coord[crnt_tetrimino][i_block][0] += x;
-		coord[crnt_tetrimino][i_block][1] += y;
+		coord[crnt][ib][0] += x;
+		coord[crnt][ib][1] += y;
+	}
+}
+
+static void	set_to_empty(int ***coord, int crnt, int len, int *is_empty, int empty)
+{
+	int	ib;
+
+	ib = -1;
+	while (++ib < 4)
+	{
+		if (empty)
+			is_empty[coord[crnt][ib][0] + coord[crnt][ib][1] * len] = 1;
+		else
+			is_empty[coord[crnt][ib][0] + coord[crnt][ib][1] * len] = 0;
 	}
 }
 
 static int	will_collide(int ***coord, int current_tetri)
 {
 	int	prev_tetri;
-	int block_newtet;
-	int block_prevtet;
+	int	block_newtet;
+	int	block_prevtet;
 
 	block_newtet = -1;
 	while (++block_newtet < 4)
@@ -45,10 +59,11 @@ static int	will_collide(int ***coord, int current_tetri)
 					return (1);
 		}
 	}
+
 	return (0);
 }
 
-static int	max(int **current, int xy)
+int			max(int **current, int xy)
 {
 	int	max;
 	int	i_block;
@@ -63,31 +78,48 @@ static int	max(int **current, int xy)
 	return (max);
 }
 
-int			resolve(int ***crd, int crnt, int len, int y)
+void			to_next_empty(int *is_empty, int len, int *x, int *y, int *size)
+{
+	int	i;
+	int	max_i;
+
+	i = *x + *y * len;
+	max_i = len * len;
+	while (++i < max_i) // on veut le next, donc mini ++
+		if (is_empty[i] == 1 && *x < size[0] && *y < size[1])
+		{
+			*x = i % len;
+			*y = i / len;
+			return ;
+		}
+	*x = len;
+}
+
+int			resolve(int ***crd, int crnt, int len, int y, int *is_empty)
 {
 	int	x;
+	int	size[2];
 
 	x = 0;
 	if (crd[crnt] == 0)
 		return (1);
-	while (len > (x + max(crd[crnt], 0)) && len > (y + max(crd[crnt], 1)))
+	size[0] = len - max(crd[crnt], 0);
+	size[1] = len - max(crd[crnt], 1);
+	while (x < size[0] && y < size[1])
 	{
 		translate(crd, crnt, x, y);
 		if (will_collide(crd, crnt))
 			translate(crd, crnt, -x, -y);
 		else
 		{
-			if (resolve(crd, crnt + 1, len, 0))
+			set_to_empty(crd, crnt, len, is_empty, 0);
+
+			if (resolve(crd, crnt + 1, len, 0, is_empty))
 				return (1);
 			translate(crd, crnt, -x, -y);
+			set_to_empty(crd, crnt, len, is_empty, 1);
 		}
-		if ((x + max(crd[crnt], 0)) < len - 1)
-			x++;
-		else
-		{
-			y++;
-			x = 0;
-		}
+		to_next_empty(is_empty, len, &x, &y, size);
 	}
 	return (0);
 }

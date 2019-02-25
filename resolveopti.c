@@ -13,10 +13,12 @@
 #include "fillit.h"
 
 /*
- * Une sorte de frame mais juste pour les x
+ * frame (juste pour les lignes), avant modif du current
+ * max[ligne] renvoie le max vers la droite sur la ligne dans le carre
+ * pas besoin de le faire pour les colonnes car ca balaye deja ligne par ligne
 */
 
-static int	*max_x_before_current(int ***coord, int current, int len)
+static int	*frame(int ***coord, int current, int len)
 {
 	int	i_tetri;
 	int	i_block;
