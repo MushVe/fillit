@@ -15,10 +15,11 @@ NAME = fillit
 LIB = libft/libft.a
 
 FILE = check.c\
-	   main.c\
-	   normalize_tetri.c\
-	   resolve.c\
-	   read_file.c
+		main.c\
+		normalize_tetri.c\
+		resolve.c\
+		resolve2.c\
+		read_file.c
 
 INC = -I libft/includes
 
