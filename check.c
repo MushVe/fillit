@@ -30,24 +30,49 @@ static int	count_sharp(char *str)
 		return (count_sharp(str + 1));
 }
 
+static	int	not_in(int *path, int pos)
+{
+	int	j;
+
+	j = -1;
+	while (++j < 4)
+		if (path[j] == pos)
+			return (0);
+	return (1);
+}
+
 static int	neighbors(char *str)
 {
 	int	i;
-	int	count;
+	int	j;
+	int	p[7];
+	int	nothing_changed;
 
-	i = -1;
-	count = 0;
-	while (++i < 20 && count != 4)
-		if (str[i] == '#')
-		{
-			if ((i + 1 < 20 || i + 5 < 20) \
-				&& (str[i + 1] == '#' || str[i - 1] == '#' \
-				|| str[i - 5] == '#' || str[i + 5] == '#'))
-				count++;
-		}
-	if (count == 4)
-		return (1);
-	return (0);
+	
+	i = 1;
+	while (i < 7)
+		p[i++] = -1;
+	i = 0;
+	while (i < 20 && str[i++] != '#')
+	p[0] = i;
+	j = 1;
+	while (j < 4)
+	{
+		nothing_changed = j;
+		if (p[j - 1] + 1 > 20 && not_in(p, p[j - 1] + 1) && str[p[j - 1] + 1] == '#')
+			p[j++] = i + 1;
+		if (p[j - 1] + 5 > 20 && not_in(p, p[j - 1] + 5) && str[p[j - 1] + 5] == '#')
+			p[j++] = i + 5;
+		if (p[j - 1] - 1 <= 0 && not_in(p, p[j - 1] - 1) && str[p[j - 1] - 1] == '#')
+			p[j++] = i - 1;
+		if (p[j - 1] - 5 <= 0 && not_in(p, p[j - 1] - 5) && str[p[j - 1] - 5] == '#')
+			p[j++] = i - 5;
+		if (nothing_changed == j)
+			j++;
+	}
+	if (p[3] == -1)
+		return (0);
+	return (1);
 }
 
 int			is_tetrimino(char *str)
