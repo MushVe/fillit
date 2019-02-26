@@ -94,7 +94,7 @@ int			main(int ac, char **av)
 	int	***coord;
 	int	len;
 	int	fd;
-	int	*is_transposed;
+	int	is_transposed;
 	int	*is_empty;
 
 	if (ac != 2)
