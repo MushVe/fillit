@@ -50,6 +50,7 @@ test:
 
 clean:
 	$(RM) $(OBJ)
+	rm -df objs
 
 fclean: clean
 	$(RM) $(NAME)
