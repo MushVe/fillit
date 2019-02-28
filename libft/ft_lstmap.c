@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: cseguier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/20 20:59:21 by czhang            #+#    #+#             */
-/*   Updated: 2018/11/20 23:21:05 by czhang           ###   ########.fr       */
+/*   Created: 2018/11/26 13:49:12 by cseguier          #+#    #+#             */
+/*   Updated: 2018/11/26 14:26:17 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,22 @@
 
 t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	t_list	*newelem;
+	t_list	*new;
+	t_list	*tmp;
+	t_list	*begin;
 
-	if (!(newelem = ft_lstnew(f(lst)->content, f(lst)->content_size)))
+	tmp = f(lst);
+	if (!(new = ft_lstnew(tmp->content, tmp->content_size)))
 		return (NULL);
-	if (lst->next)
-		newelem->next = ft_lstmap(lst->next, f);
-	return (newelem);
+	begin = new;
+	lst = lst->next;
+	while (lst)
+	{
+		tmp = f(lst);
+		if (!(new->next = ft_lstnew(tmp->content, tmp->content_size)))
+			return (NULL);
+		new = new->next;
+		lst = lst->next;
+	}
+	return (begin);
 }

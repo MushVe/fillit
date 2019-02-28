@@ -69,52 +69,31 @@ static int	print(int ***coord, int len)
 	return (1);
 }
 
-static int		err(const char *error_str)
-{
-	ft_putendl(error_str);
-	return (0);
-}
-
-static int		*resize_is_empty(int len)
-{
-	int	*tab;
-	int	i;
-
-//	ft_memdel((void**)&is_empty);
-	if (!(tab = (int*)malloc(sizeof(int) * len * len)))
-		return (0);
-	i = -1;
-	while (++i < len * len)
-		tab[i] = 1;
-	return (tab);
-}
-
 int			main(int ac, char **av)
 {
 	int	***coord;
 	int	len;
 	int	fd;
-	int	is_transposed;
-	int	*is_empty;
 
 	if (ac != 2)
-		return (err("usage: ./fillit tetrimos_file"));
+	{
+		ft_putendl("usage: ./fillit tetrimos_file");
+		return (0);
+	}
 	if (0 > (fd = open(av[1], O_RDONLY)))
-		return (err("error"));
+	{
+		ft_putendl("error");
+		return (0);
+	}
 	if (!(coord = read_file(fd, 0)))
-		return (err("error"));
-	is_transposed = is_big_x(coord);
+	{
+		ft_putendl("error");
+		return (0);
+	}
 	len = 2;
-	if (!(is_empty = resize_is_empty(len)))
-		return (err("error"));
-	while (!resolve(coord, 0, len, 0, is_empty))
-		if (!(is_empty = resize_is_empty(++len)))
-			return ((err("error")));
-	if (is_transposed)
-		swap_x_y(coord);
+	while (!resolve(coord, 0, len, 0))
+		len++;
 	print(coord, len);
 	free_tab(coord);
-	ft_memdel((void**)&is_empty);
 	return (1);
-
 }

@@ -3,62 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: cseguier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/20 04:02:50 by czhang            #+#    #+#             */
-/*   Updated: 2018/11/20 05:22:29 by czhang           ###   ########.fr       */
+/*   Created: 2018/11/12 15:08:38 by cseguier          #+#    #+#             */
+/*   Updated: 2018/12/05 19:23:26 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static long	powdix(int len)
+static void	nbr(int n, int i, char *s)
 {
-	long	m;
+	int	max;
 
-	m = 1;
-	while (len--)
-		m *= 10;
-	return (m);
-}
-
-static int	nlen(int n)
-{
-	int len;
-
-	len = 0;
-	while (n)
+	max = 0;
+	if (n < 0)
 	{
-		n /= 10;
-		len++;
+		if (n == -2147483648)
+		{
+			max = 1;
+			n++;
+		}
+		s[0] = '-';
+		n = -n;
 	}
-	return (len);
+	if (n >= 10)
+		nbr(n / 10, i - 1, s);
+	s[i] = (max == 1 ? ((n % 10) + '1') : ((n % 10) + '0'));
 }
 
 char		*ft_itoa(int n)
 {
-	int		len;
-	int		i;
-	long	vrain;
 	char	*str;
+	int		cpt;
+	int		nb;
 
-	len = (n <= 0) ? 1 : 0;
-	vrain = (long)n;
-	len += nlen(n);
-	if (!(str = (char*)malloc(sizeof(char) * (len + 1))))
+	cpt = 0;
+	nb = n;
+	while (nb != 0)
+	{
+		cpt++;
+		nb = nb / 10;
+	}
+	if (n <= 0)
+		cpt++;
+	if (!(str = ft_strnew(cpt)))
 		return (NULL);
-	str[len] = 0;
-	i = 0;
-	if (vrain < 0)
-	{
-		str[i++] = '-';
-		len--;
-		vrain *= -1;
-	}
-	while (len--)
-	{
-		str[i++] = vrain / powdix(len) + '0';
-		vrain = vrain - (vrain / powdix(len)) * powdix(len);
-	}
+	nbr(n, cpt - 1, str);
 	return (str);
 }
