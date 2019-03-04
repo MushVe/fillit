@@ -6,7 +6,7 @@
 #    By: cseguier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 17:07:19 by cseguier          #+#    #+#              #
-#    Updated: 2019/03/04 14:39:03 by cseguier         ###   ########.fr        #
+#    Updated: 2019/03/04 14:45:17 by cseguier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ FILE = ft_atoi.c ft_bzero.c ft_capitalize.c ft_foreach.c ft_isalnum.c \
 
 SRC = $(FILE:%=%)
 
-OBJ = $(SRC:.c=.o)
+OBJ = $(FILE:%.c=%.o)
 
 CFLAGS = -Wall -Werror -Wextra
 
@@ -39,8 +39,10 @@ CC = gcc $(CFLAGS)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME):
+		@$(CC) -c $(SRC)
 		@ar rcs $(NAME) $(OBJ)
+		@ranlib $(NAME)
 
 clean:
 		@/bin/rm -f $(OBJ)
