@@ -6,7 +6,7 @@
 #    By: cseguier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 17:07:19 by cseguier          #+#    #+#              #
-#    Updated: 2019/03/04 13:04:56 by cseguier         ###   ########.fr        #
+#    Updated: 2019/03/04 14:39:03 by cseguier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME = libft.a
 
-SRC = ft_atoi.c ft_bzero.c ft_capitalize.c ft_foreach.c ft_isalnum.c \
+FILE = ft_atoi.c ft_bzero.c ft_capitalize.c ft_foreach.c ft_isalnum.c \
 	  ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c \
 	  ft_lowcase.c ft_lstadd.c ft_lstdel.c ft_lstdelone.c ft_lstiter.c \
 	  ft_lstmap.c ft_lstnew.c ft_memalloc.c ft_memccpy.c ft_memchr.c \
@@ -28,6 +28,8 @@ SRC = ft_atoi.c ft_bzero.c ft_capitalize.c ft_foreach.c ft_isalnum.c \
 	  ft_strncpy.c ft_strnequ.c ft_strnew.c ft_strnstr.c ft_strrchr.c \
 	  ft_strrev.c ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c \
 	  ft_tolower.c ft_toupper.c ft_upcase.c
+
+SRC = $(FILE:%=%)
 
 OBJ = $(SRC:.c=.o)
 
