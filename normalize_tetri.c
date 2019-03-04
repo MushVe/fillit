@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normalize_tetri.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/12 17:41:40 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/25 14:26:01 by cseguier         ###   ########.fr       */
+/*   Created: 2019/03/04 13:48:20 by cseguier          #+#    #+#             */
+/*   Updated: 2019/03/04 14:25:16 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	move_left(char *str)
 	while (++line < 4)
 	{
 		ft_memmove((void*)str + line * 5,
-			(const void*)str + line * 5 + n_col, 4 - n_col);
+				(const void*)str + line * 5 + n_col, 4 - n_col);
 		j = n_col;
 		while (j > 0)
 			str[line * 5 + 4 - j--] = '.';

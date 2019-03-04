@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/15 13:22:07 by cseguier          #+#    #+#             */
-/*   Updated: 2019/02/22 18:17:33 by czhang           ###   ########.fr       */
+/*   Created: 2019/03/04 13:34:26 by cseguier          #+#    #+#             */
+/*   Updated: 2019/03/04 13:46:26 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	translate(int ***coord, int crnt_tetrimino, int x, int y)
 {
-	int i_block;
+	int	i_block;
 
 	i_block = -1;
 	while (++i_block < 4)
@@ -24,24 +24,22 @@ static void	translate(int ***coord, int crnt_tetrimino, int x, int y)
 	}
 }
 
-static int	will_collide(int ***coord, int current_tetri)
+static int	collide(int ***coord, int current)
 {
-	int	prev_tetri;
-	int block_newtet;
-	int block_prevtet;
+	int	prev;
+	int	b_cur;
+	int	b_pre;
 
-	block_newtet = -1;
-	while (++block_newtet < 4)
+	b_cur = -1;
+	while (++b_cur < 4)
 	{
-		prev_tetri = -1;
-		while (++prev_tetri < current_tetri)
+		prev = -1;
+		while (++prev < current)
 		{
-			block_prevtet = -1;
-			while (++block_prevtet < 4)
-				if (coord[current_tetri][block_newtet][0]
-						== coord[prev_tetri][block_prevtet][0]
-						&& coord[current_tetri][block_newtet][1]
-						== coord[prev_tetri][block_prevtet][1])
+			b_pre = -1;
+			while (++b_pre < 4)
+				if (coord[current][b_cur][0] == coord[prev][b_pre][0]
+					&& coord[current][b_cur][1] == coord[prev][b_pre][1])
 					return (1);
 		}
 	}
@@ -73,7 +71,7 @@ int			resolve(int ***crd, int crnt, int len, int y)
 	while (len > (x + max(crd[crnt], 0)) && len > (y + max(crd[crnt], 1)))
 	{
 		translate(crd, crnt, x, y);
-		if (will_collide(crd, crnt))
+		if (collide(crd, crnt))
 			translate(crd, crnt, -x, -y);
 		else
 		{

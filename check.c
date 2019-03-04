@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/09 15:02:42 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/27 12:53:06 by cseguier         ###   ########.fr       */
+/*   Created: 2019/03/04 13:08:03 by cseguier          #+#    #+#             */
+/*   Updated: 2019/03/04 13:22:56 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,20 @@ static int	is_valid_char(char c, int i)
 	if ((i % 5) == 4)
 		return (c == '\n');
 	else
-		return ((c == '.') || (c == '#'));
+		return (c == '.' || c == '#');
 }
 
 static int	count_sharp(char *str)
 {
-	if (*str == '\0')
-		return (0);
-	else if (*str == '#')
-		return (1 + count_sharp(str + 1));
-	else
-		return (count_sharp(str + 1));
+	int	i;
+	int	cpt;
+
+	i = -1;
+	cpt = 0;
+	while (str[++i] != '\0')
+		if (str[i] == '#')
+			cpt++;
+	return (cpt);
 }
 
 static int	neighbors(char *str)

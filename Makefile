@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: czhang <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/11/07 19:51:13 by czhang            #+#    #+#              #
-#    Updated: 2019/02/27 13:09:44 by cseguier         ###   ########.fr        #
+#    Created: 2019/03/04 13:00:08 by cseguier          #+#    #+#              #
+#    Updated: 2019/03/04 13:04:26 by cseguier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,9 @@ NAME = fillit
 
 LIB = libft/libft.a
 
-FILE = check.c\
-	   main.c\
-	   normalize_tetri.c\
-	   resolve.c\
-	   read_file.c
+FILE = check.c main.c normalize_tetri.c resolve.c read_file.c
 
-INC = -I libft/includes
+INC = -I libft
 
 SRC = $(FILE:%=%)
 
@@ -35,26 +31,23 @@ RM = rm -f
 all: $(NAME)
 
 $(NAME) : $(LIB) $(OBJ)
-	$(CC) -o $@ $(OBJ) -L libft/ -lft
+		@$(CC) -o $@ $(OBJ) -L libft/ -lft
 
 $(LIB) :
-	make -C libft/ all
+		@make -C libft/ all
 
 objs/%.o: %.c
-	@mkdir -p objs
-	$(CC) $(INC) -o $@ -c $<
-
-test:
-	gcc check.c coord.c tetrimino.c read_file.c ../main.c $(LIB)
+		@mkdir -p objs
+		@$(CC) $(INC) -o $@ -c $<
 
 clean:
-	$(RM) $(OBJ)
-	rm -df objs
-	make -C libft/ clean
+		@$(RM) $(OBJ)
+		@rm -df objs
+		@make -C libft/ clean
 
 fclean: clean
-	$(RM) $(NAME)
-	make -C libft/ fclean
+		@$(RM) $(NAME)
+		@make -C libft/ fclean
 
 re: fclean all
 

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: czhang <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/07 17:42:59 by czhang            #+#    #+#             */
-/*   Updated: 2019/02/22 18:29:54 by czhang           ###   ########.fr       */
+/*   Created: 2019/03/04 13:18:30 by cseguier          #+#    #+#             */
+/*   Updated: 2019/03/04 14:21:36 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void		free_tab(int ***coord)
+void		free_coord(int ***coord)
 {
 	int	i_tetri;
 	int	i_block;
@@ -69,6 +69,17 @@ static int	print(int ***coord, int len)
 	return (1);
 }
 
+static void	error(int id, int fd)
+{
+	if (id == 0)
+		ft_putendl("usage: ./fillit tetrimos_file");
+	if (id == 1 || id == 2)
+		ft_putendl("error");
+	if (id == 2)
+		close(fd);
+	exit(0);
+}
+
 int			main(int ac, char **av)
 {
 	int	***coord;
@@ -76,24 +87,17 @@ int			main(int ac, char **av)
 	int	fd;
 
 	if (ac != 2)
-	{
-		ft_putendl("usage: ./fillit tetrimos_file");
-		return (0);
-	}
+		error(0, 0);
 	if (0 > (fd = open(av[1], O_RDONLY)))
-	{
-		ft_putendl("error");
-		return (0);
-	}
+		error(1, 0);
 	if (!(coord = read_file(fd, 0)))
-	{
-		ft_putendl("error");
-		return (0);
-	}
+		error(2, fd);
+	if (-1 == close(fd))
+		error(1, 0);
 	len = 2;
 	while (!resolve(coord, 0, len, 0))
 		len++;
 	print(coord, len);
-	free_tab(coord);
+	free_coord(coord);
 	return (1);
 }

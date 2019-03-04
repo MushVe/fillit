@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cseguier <cseguier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/12 16:40:33 by cseguier          #+#    #+#             */
-/*   Updated: 2019/02/25 16:42:40 by cseguier         ###   ########.fr       */
+/*   Created: 2019/03/04 14:26:07 by cseguier          #+#    #+#             */
+/*   Updated: 2019/03/04 14:29:35 by cseguier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static int		***malloc_tab(int cpt)
+static int	***malloc_tab(int cpt)
 {
 	int	***coord;
 	int	i_cpt;
@@ -36,16 +36,16 @@ static int		***malloc_tab(int cpt)
 	return (coord);
 }
 
-static int		***extract(char *s, int cpt)
+static int	***extract(char *s, int cpt)
 {
 	int	***coord;
-	int i_cpt;
+	int	i_cpt;
 	int	i_block;
-	int i;
+	int	i;
 
 	if (!(coord = malloc_tab(cpt)))
 	{
-		free_tab(coord);
+		free_coord(coord);
 		return (0);
 	}
 	i_cpt = -1;
@@ -63,25 +63,25 @@ static int		***extract(char *s, int cpt)
 	return (coord);
 }
 
-static int		***free_cs(int ***coord, char *s)
+static int	***free_cs(int ***coord, char *s)
 {
-	free_tab(coord);
+	free_coord(coord);
 	ft_memdel((void**)&s);
 	return (0);
 }
 
-static char		*dupjoinfree(char *s, const char *buff)
+static char	*dupjoinfree(char *s, const char *buff)
 {
-	char	*dup;
+	char	*tmp;
 
-	dup = ft_strdup(s);
+	tmp = ft_strdup(s);
 	ft_memdel((void**)&s);
-	s = ft_strjoin(dup, buff);
-	ft_memdel((void**)&dup);
+	s = ft_strjoin(tmp, buff);
+	ft_memdel((void**)&tmp);
 	return (s);
 }
 
-int				***read_file(int fd, int cpt)
+int			***read_file(int fd, int cpt)
 {
 	char	*s;
 	char	buff[21];
